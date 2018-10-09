@@ -11,10 +11,10 @@ paths:
     ###################### Create Start Template API ######################
     post:
       description: |
-        Create a start-up template for a specified parameter. The starting template contains most of the configuration parameters when creating a virtual machine, avoiding repetitive work when creating a virtual machine each time. <br>
-        If you create a virtual machine using the starting template, if you specify that certain parameters conflict with the parameters in the template, then the newly specified parameters replace the parameters in the template. <br>
-        If you create a virtual machine using the starting template, the database Disks parameter in the template will fail if it is specified that the image ID is not consistent with the image ID in the template. <br>
-        If the user creates a VM with an availability group (Ag), the parameters in the template associated with the Ag are not adjustable, and only the template should prevail.
+        Create a start-up template for a specified parameter. The starting template contains most of the configuration parameters when creating VM, avoiding repetitive work when creating VM each time. <br>
+        If you create VM using the starting template, and if certain specified parameters conflict with the parameters in the template, then the newly specified parameters will replace the parameters in the template. <br>
+        If you create VM using the starting template, the dataDisks parameter in the template will fail if it is specified that the image ID is not consistent with the image ID in the template. <br>
+        If the user creates VM with an availability group (Ag), the parameters in the template associated with the Ag are not adjustable, and only the template should prevail.
       operationId: createInstanceTemplate
       x-jdcloud-internal: true
       parameters:
@@ -28,11 +28,11 @@ paths:
           in: query
           type: string
           required: true
-          description: "Name of the Start Template, <a href='https://www.jdcloud.com/help/detail/3870/isCatalog/1'>Refer to the public parameter specification </a>."
+          description: "Name of the Start Template, <a href='http://docs.jdcloud.com/virtual-machines/api/general_parameters'>Refer to the public parameter specification </a>."
         - name: description
           in: query
           type: string
-          description: "Description of the Start Template, <a href='https://www.jdcloud.com/help/detail/3870/isCatalog/1'>Refer to the public parameter specification </a>."
+          description: "Description of the Start Template, <a href='http://docs.jdcloud.com/virtual-machines/api/general_parameters'>Refer to the public parameter specification </a>."
       responses:
         200:
           description: OK
@@ -80,7 +80,7 @@ paths:
           items:
             $ref: "../../common/model/Filter.yaml#/definitions/filter"
           description: |
-            name-Start template name, fuzzy match, multiple support
+            name - Start template name, fuzzy match, multiple support
             instanceTemplateId-Start template ID, exact match, multiple support
       responses:
         200:
@@ -166,11 +166,11 @@ paths:
         - name: description
           in: query
           type: string
-          description: "Template description, <a href='https://www.jdcloud.com/help/detail/3870/isCatalog/1'>Refer to the public parameter specification</a>."
+          description: "Template description, <a href='http://docs.jdcloud.com/virtual-machines/api/general_parameters'>Refer to the public parameter specification</a>."
         - name: name
           in: query
           type: string
-          description: "Template name, <a href='https://www.jdcloud.com/help/detail/3870/isCatalog/1'>Refer to the public parameter specification</a>."
+          description: "Template name, <a href='http://docs.jdcloud.com/virtual-machines/api/general_parameters'>Refer to the public parameter specification</a>."
       responses:
         200:
           description: OK

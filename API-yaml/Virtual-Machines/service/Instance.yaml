@@ -11,62 +11,62 @@ paths:
     ###################### Create Machine API ######################
     post:
       description: |
-        Create a virtual machine with one or more specified configurations, which is divided into three types: 1. general mode, 2. availability group, 3. use of the starting template. The required transfer of parameters when creating a virtual machine in three ways is different. Please refer to details</a><br>
+        Create VM with one or more specified configurations, which is divided into three types: 1. general mode, 2. availability group, 3. use of the starting template. The required and non-required transfer of parameters when creating VM in the three ways is different.<a href="http://docs.jdcloud.com/virtual-machines/api/create_vm_sample">Please refer to details</a><br>
         - Creating a VM requires real-name verification
-        - Specification Type
-            - Can query <a href="https://www.jdcloud.com/help/detail/2901/isCatalog/1">DescribeInstanceTypes</a> Interface gets specification information for a specified domain or availability zone
+        - Instance Type
+            - Can query <a href="http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a> Interface gets specification information for a specified domain or availability zone
             - It is not possible to use for off-line, or a specification ID of the carnation already sold
         - image
             - Windows Server 2012 R2 Standard Edition 64-bit Chinese version SQL Server 2014 Standard SP2 memory needs more than 1 GB;
             - Windows Server all image CPUs must not be selected to exceed 64 cores CPU.
-            - Can query <a href="https://www.jdcloud.com/help/detail/2874/isCatalog/1">DescribeImages</a> Interface derives image information for the specified zone.
-            - The selected image must support the selected specification type. Can query <a href="https://www.jdcloud.com/help/detail/2872/isCatalog/1">DescribeImageConstraints</a> Interface obtains specification type limit information for the specified image.<br>
-        - Network Instance Type
-            - Specify primary network card configuration information
+            - Can query <a href="http://docs.jdcloud.com/virtual-machines/api/describeimages">DescribeImages</a> Interface derives image information for the specified zone.
+            - The selected image must support the selected instance type. Can query <a href="http://docs.jdcloud.com/virtual-machines/api/describeimageconstraints">DescribeImageConstraints</a> Interface obtains instance type limit information for the specified image.<br>
+        - Network Configuration
+            - Specify primary network interface configuration information
                 - SubnetId must be specified
                 - You can specify the elastrological specification to constrain the created EIP, the bandwidth value range[1-100] Mbps, step 1 Mbps
-                - The primary intranet IP (priority IpAddress) of the master network card can be specified, at  which time maxCount can only be 1
-                - The security group securityGroup needs to be within the same virtual private cloud VPC as the subnet Subnet
-                - A security group must be specified when a virtual machine is created, and  at most 5 security groups are specified. If no security group is specified, the default security group is used by default
-                - The main network card deveIndex is set to 1
+                - The primary intranet IP (primaryIpAddress) of primary network interface can be specified, when maxCount can only be 1
+                - The security group needs to be within the same VPC as the Subnet
+                - A security group must be specified when a VM is created, and  at most 5 security groups are specified. If no security group is specified, the default security group is used by default
+                - The primary network interface deviceIndex is set to 1
         - Storage
             - System Disk
-                - Disk classification, system disk support, or cloud
+                - Disk classification, system disk supports local or cloud
                 - Disk Size
                     - ERROR: Unable to specify size, default 40GB
                     - cloud: Value range: 40-500GB, and cannot be smaller than the minimum system disk size of image; if not specified, the default is the system disk size in the image
                 - Auto-delete
-                    - If local, default auto-deletion, this property cannot be modified
-                    - True if cloud type-based Cloud Disk Service are configured
+                    - If local, default auto-deletion, this attribute cannot be modified
+                    - True if cloud disk paid by configuration
             - Data Disk
                 - Disk classification, data disks only support cloud
-                - The type of Cloud Disk Service drive can select ssd, premium-hdd
+                - The type of cloud disk can be ssd or premium-hdd
                 - Disk Size
                     - premium-hdd: Range[20, 3000] GB, Step Size: 10G
                     - ssd: Range[20, 1000] GB, Step Size: 10G
                 - Auto-delete
-                    - Auto-deletion by default, for the data disk or shared data disk of the monthly package, this parameter does not take effect
-                    - SnapshotId can be specified to create a Cloud Disk Service
+                    - Auto-deletion by default, for the data disk of the monthly package or shared data disk, this parameter does not take effect
+                    - SnapshotId can be specified to create a cloud disk
                 - You can create a disk from a snapshot
-            - The VM of local type system can attach 8 Cloud Disk Services
-            - The VM of cloud type system can attach 7 Cloud Disk Services
+            - The virtual machine with local disk as system disk can be attached with 8 data disks
+            - The virtual machine with cloud disk as system disk can be attached with 7 data disks
         - Billing
-            - Billing mode of EIP. If you choose to set separately by consumption, the other billing modes are subject to the machine.
-            - The billing mode of the Cloud Disk Service is subject to the machine
+            - Billing mode of EIP. You may choose pay by consumption separately, and the other billing modes are subject to the machine.
+            - The billing mode of the cloud disk is subject to the machine
         - Others
             - After the creation is complete, the machine status is running
-            - Only the Linux system Virtual Machines can specify key pair
+            - Only the Linux system virtual machines can specify key pair
             - maxCount is the maximum effort, and it is not guaranteed that maxCount can be reached
             - The VM's az replaces the az attribute of the disk
         - Password
-            - <a href="https://www.jdcloud.com/help/detail/3870/isCatalog/1">Refer to the public parameter specification</a>
+            - <a href="http://docs.jdcloud.com/virtual-machines/api/general_parameters">Refer to the public parameter specification</a>
       operationId: createInstances
       parameters:
         - name: instanceSpec
           in: body
           required: true
           description: |
-            Describe VM instance type
+            Describe VM configuration
           schema:
             $ref: "../model/InstanceSpec.yaml#/definitions/instanceSpec"
         - name: maxCount
@@ -130,10 +130,10 @@ paths:
             $ref: "../../common/model/Filter.yaml#/definitions/filter"
           description: | 
             instanceId-VM ID, exact match, multiple supported
-            PrivateIpAddress-primary private IP address of primary network interface, fuzzy match, multiple supported
-            az-AZ, exact match, multiple supported
-            vpcId-Virtual Private Cloud ID, exact match, multiple supported
-            status - Virtual machine status, exact match, multiple supported <a href='https://www.jdcloud.com/help/detail/3869/isCatalog/1'>refer to virtual machine status</a>
+            PrivateIpAddress-primary intranet IP address of primary network interface, fuzzy match, multiple supported
+            az-Availability Zone, exact match, multiple supported
+            vpcId-VPC ID, exact match, multiple supported
+            status - Virtual machine status, exact match, multiple supported <a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">Refer to virtual machine status</a>
             name-VM name, fuzzy match, single supported
             imageId-Image ID, exact match, multiple supported
             networkInterfaceId-ENI ID, exact match, multiple supported
@@ -196,10 +196,10 @@ paths:
     ###################### Delete Machine API ######################
     delete:
       description: |
-        Delete a single virtual machine that is paid by configuration, or expires in a monthly package. You cannot delete a virtual machine without billing information. <br>
-        The virtual machine status must be </b>running</b>, </b>stopped<b>, <b>error<b>, and the virtual machine is not in progress to delete. <br>
-        The virtual machine that has not expired in monthly package cannot be deleted. The white list user cannot delete the virtual machine that has expired in monthly package. <br>
-        If the data disk attached in the machine is the cloud disk billed by instance type and is not a shared Cloud Disk Service, and the AutoDelete property is true, then the data disk is deleted along with the machine.
+        Delete a single VM that is paid by configuration, or expires in monthly package. You cannot delete a VM without billing information. <br>
+        The virtual machine status must be </b>running</b>, </b>stopped<b>, or <b>error<b>, and the deletion is only available when there is no task in progress for virtual machine. <br>
+        The virtual machine that has not expired in monthly package cannot be deleted. <br>
+        If the data disk attached to the machine is the cloud disk billed by configuration and is not a shared cloud disk, and the AutoDelete attribute is true, then the data disk is deleted along with the machine.
       operationId: deleteInstance
       x-jdcloud-mfa: true
       responses:
@@ -239,9 +239,9 @@ paths:
             $ref: "../../common/model/Filter.yaml#/definitions/filter"
           description: |
             instanceId-VM ID, exact match, multiple supported
-            PrivateIpAddress-primary private IP address of primary network interface, fuzzy match, multiple supported
-            vpcId-Virtual Private Cloud ID, exact match, multiple supported
-            status - Virtual machine status, exact match, multiple supported <a href='https://www.jdcloud.com/help/detail/3869/isCatalog/1'>refer to virtual machine status</a>
+            PrivateIpAddress-primary intranet IP address of primary network interface, fuzzy match, multiple supported
+            vpcId-VPC ID, exact match, multiple supported
+            status - Virtual machine status, exact match, multiple supported <a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">Refer to virtual machine status</a>
             name-VM name, fuzzy match, single supported
             imageId-Image ID, exact match, multiple supported
             networkInterfaceId-ENI ID, exact match, multiple supported
@@ -273,9 +273,9 @@ paths:
           description: "Service unavailable"
 
   "/instancePrivateIpAddress":
-    ###################### Batch query primary private IP address of VM primary network interface ######################
+    ###################### Batch query primary intranet IP address of VM primary network interface ######################
     get:
-      description: "Query the private IP address of the VM in batches, and query the primary private IP address in the primary network interface."
+      description: "Query the private IP address of the VM in batches is to query the primary intranet IP of primary network interface."
       operationId: describeInstancePrivateIpAddress
       parameters:
         - name: pageNumber
@@ -295,9 +295,9 @@ paths:
             $ref: "../../common/model/Filter.yaml#/definitions/filter"
           description: |
             instanceId-VM ID, exact match, multiple supported
-            PrivateIpAddress-primary private IP address of primary network interface, fuzzy match, multiple supported
-            vpcId-Virtual Private Cloud ID, exact match, multiple supported
-            status - Virtual machine status, exact match, multiple supported <a href='https://www.jdcloud.com/help/detail/3869/isCatalog/1'>refer to virtual machine status</a>
+            PrivateIpAddress-primary intranet IP address of primary network interface, fuzzy match, multiple supported
+            vpcId-VPC ID, exact match, multiple supported
+            status - Virtual machine status, exact match, multiple supported <a href="http://docs.jdcloud.com/virtual-machines/api/vm_status">Refer to virtual machine status</a>
             name-VM name, fuzzy match, single supported
             imageId-Image ID, exact match, multiple supported
             networkInterfaceId-ENI ID, exact match, multiple supported
@@ -352,7 +352,7 @@ paths:
     ###################### Start Machine API ######################
     post:
       description: |
-        Starting a single virtual machine, only the virtual machine with stopped status can be started, and the virtual machine does not have a task in progress to start. <br>
+        Start a single VM, only the virtual machine in the status of <b>stopped</b> can be started, and the start is only available when there is no task in progress for virtual machine.<br>
         Only the VM with normal billing status can be started.
       operationId: startInstance
       responses:
@@ -373,7 +373,7 @@ paths:
     ###################### Reboot Machine API ######################
     post:
       description: |
-        Reboot a single VM. Only the VM without ongoing tasks and is in the status of <b>running</b> can be rebooted.
+        Reboot a single VM, only the virtual machine in the status of <b>running</b> can be rebooted, and the reboot is only available when there is no task in progress for virtual machine.
       operationId: rebootInstance
       responses:
         200:
@@ -393,11 +393,11 @@ paths:
     ######################Attach ENI with VM ######################
     post:
       description: |
-          A virtual machine attaches an elastic network interface <br>
-          The virtual machine status must be running or stopped status without being operated, the task is available. <br>
-          If the public IP is associated with the elastic network interface, the az of the public IP needs to be consistent with the az of the Virtual Machines, or the public network IP belongs to the full available zone to be attached. <br>
-          The number of the Virtual Machines to attach the elastic network interface cannot exceed the limit of the instance type. Can query <a href='https://www.jdcloud.com/help/detail/2901/isCatalog/1'> DescribeInstanceTypes</a> interface gives specification information for the specified zone or availability zone. <br>
-          The elastic network interface and the Virtual Machines must be under the same vpc.
+          Attach an elastic network interface for a virtual machine. <br>
+          The virtual machine status must be <b>running</b> or <b>stopped</b>, and the operation is only available when there is no task in progress. <br>
+          If the public IP is associated with the elastic network interface, the attachment is only available when the az of the public IP is consistent with that of the virtual machine or the public IP belongs to the full availability zone. <br>
+          The number of virtual machines attached with the elastic network interface cannot exceed the limit of the instance type. Can query <a href='http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes">DescribeInstanceTypes</a>Interface gives specification information for the specified zone or availability zone. <br>
+          The elastic network interface and the virtual machine must be under the same vpc.
       operationId: attachNetworkInterface
       parameters:
         - name: networkInterfaceId
@@ -413,7 +413,7 @@ paths:
           description: "Auto-delete with the machine, False by default."
       responses:
         200:
-          description: "OK"
+          description: OK
         400:
           description: "Invalid parameter"
         401:
@@ -429,8 +429,8 @@ paths:
     ###################### Detach ENI from VM ######################
     post:
       description: |
-          The virtual machine will load an elastic network interface. <br>
-          The virtual machine status must be running or stopped status without being operated, the task is available. <br>
+          Detach an elastic network interface for a virtual machine. <br>
+          The virtual machine status must be <b>running</b> or <b>stopped</b>, and the operation is only available when there is no task in progress. <br>
           The primary network interface cannot be detached.
       operationId: detachNetworkInterface
       parameters:
@@ -457,7 +457,7 @@ paths:
     ###################### Modify VM's ENI Attributes ######################
     post:
       description: |
-        Modify the virtual machine's elastic network interface properties, including whether to delete with the virtual machine. <br>
+        Modify the virtual machine's elastic network interface attributes, including whether to delete with the virtual machine. <br>
         The primary network interface cannot be modified.
       operationId: modifyInstanceNetworkAttribute
       parameters:
@@ -485,8 +485,8 @@ paths:
     ###################### Associate VM with EIP ######################
     post:
       description: |
-        The Virtual Machines associates the elastic public IP, and the associating is the IP of the elastic public network corresponding to the primary IP and the intranet primary IP.
-        A virtual machine can only associate with an EIP (master network card). If the main network card already exists EIP, the error will be returned.
+        Associate Elastic IP for the primary intranet IP of primary network interface under virtual machine.<br>
+        A virtual machine can only be associated with one Elastic IP for primary network interface, and error will occur if the primary network interface is already associated with Elastic IP.<br>
       operationId: associateElasticIp
       parameters:
         - name: elasticIpId
@@ -512,7 +512,7 @@ paths:
     ###################### Disassociate VM from EIP ######################
     post:
       description: |
-        The EIP disassociated from a VM is one that corresponds to the primary network interface and the primary private EIP.
+        Disassociate VM from Elastic IP is to disassociate the Elastic IP for the primary intranet IP of primary network interface.
       operationId: disassociateElasticIp
       parameters:
         - name: elasticIpId
@@ -535,12 +535,12 @@ paths:
           description: "Service unavailable"
 
   "/instances/{instanceId}:createImage":
-    ###################### VM Creates Private Image ######################
+    ###################### Create a private image for the virtual machine ######################
     post:
       description: |
-        Create a private image for the virtual machine. The virtual machine status must be stopped. <br>
-        A virtual machine can create an image with no task in progress. <br>
-        If a data disk is attached in the Virtual Machines, the snapshot of data disk is created by default to generate a packaged image. <br>
+        Create a private image for the virtual machine. The virtual machine status must be <b>stopped</b>. <br>
+        The creation of an image is only available when there is no task in progress for virtual machine. <br>
+        Image is created based on system disk backup. The whole-machine image can be created by fully or partially attaching data disk (If no changes are made, then the whole-machine image is created by default). During the process of creating an image, the snapshot of the attached cloud disk will be created and it will be associated with the image. <br>
         After calling the API, the user can not use the image normally until the image status becomes <b>ready</b>.
       operationId: createImage
       parameters:
@@ -548,12 +548,12 @@ paths:
           in: query
           type: string
           required: true
-          description: "Image Name, <a href='https://www.jdcloud.com/help/detail/3870/isCatalog/1'>Refer to the public parameter specification </a>."
+          description: Image Name, <a href='http://docs.jdcloud.com/virtual-machines/api/general_parameters'>Refer to the public parameter specification </a>.
         - name: description
           in: query
           type: string
           required: true
-          description: "Image Description, <a href='https://www.jdcloud.com/help/detail/3870/isCatalog/1'>refer to public parameter specification</a>."
+          description: Image Description, <a href='http://docs.jdcloud.com/virtual-machines/api/general_parameters'>Refer to public parameter specification</a>.
         - name: dataDisks
           in: query
           type: array
@@ -589,25 +589,25 @@ paths:
     ###################### Attach a VM with a Hard Disk ######################
     post:
       description: |
-        Attach a data disk (cloud hard disk) for a virtual machine, and the Virtual Machines and the Cloud Disk Service are not attached when they are in progress. <br>
-        The virtual machine status must be running or stopped status. <br>
-        The VM of the local disk as system disk can be attached with eight data disks, and the VM of Cloud Disk Service can be attached with seven data disks.
+        Attach a data disk (cloud disk) for a virtual machine, and the attachment is only available when there is no task in progress for virtual machine and cloud disk. <br>
+        The virtual machine status must be <b>running</b> or <b>stopped</b>. <br>
+        The virtual machine with local disk as system disk can be attached with 8 data disks, and 7 data disks for the virtual machine with cloud disk as system disk.
       operationId: attachDisk
       parameters:
         - name: diskId
           in: query
           type: string
           required: true
-          description: "Cloud Disk Service ID"
+          description: "Cloud Disk ID"
         - name: deviceName
           in: query
           type: string
-          description: "The data disk logical attach point [vda, vdb, vdc, vdd, vde, vdb, vdg, vdh, vdi], vda required when the system disk is attached."
+          description: "Data disk logical attaching point [vda, vdb, vdc, vdd, vde, vdb, vdg, vdh, vdi], vda required when the system disk is attached."
         - name: autoDelete
           in: query
           type: boolean
           default: false
-          description: "Automatically delete this Cloud Disk Service with the machine, False by default. It supports only the cloud disk service that is paid by instance types. This parameter is not valid for a shared type cloud disk service."
+          description: "Automatically delete this cloud disk with the virtual machine, False by default. The parameter can only be modified for the cloud disks that pay by configuaration, while for the cloud disk with monthly package, the parameter is set as False by default and not to be modified. The parameter is invalid for shared cloud disk."
       responses:
         200:
           description: OK
@@ -626,14 +626,14 @@ paths:
     ###################### Detach a Hard Disk from a VM ######################
     post:
       description: |
-        For virtual machine uninstalling data disk, a virtual machine, and a Cloud Disk Service are not loaded until they are in progress. <br>
+        Detach a data disk for a virtual machine, and the detachment is only available when there is no task in progress for virtual machine and cloud disk. <br>
       operationId: detachDisk
       parameters:
         - name: diskId
           in: query
           type: string
           required: true
-          description: "Cloud Disk Service ID"
+          description: "Cloud Disk ID"
         - name: force
           in: query
           type: boolean
@@ -662,7 +662,7 @@ paths:
       parameters:
         - name: dataDisks
           in: query
-          description: "Cloud Disk Service List"
+          description: "Cloud Disk List"
           type: array
           items:
             $ref: "../model/InstanceDiskAttribute.yaml#/definitions/instanceDiskAttribute"
@@ -690,11 +690,11 @@ paths:
         - name: name
           in: query
           type: string
-          description: "Name, <a href='https://www.jdcloud.com/help/detail/3870/isCatalog/1'>Refer to the public parameter specification </a>."
+          description: "Name, <a href='http://docs.jdcloud.com/virtual-machines/api/general_parameters'>Refer to the public parameter specification </a>."
         - name: description
           in: query
           type: string
-          description: "Description, <a href='https://www.jdcloud.com/help/detail/3870/isCatalog/1'>Refer to the public parameter specification</a>."
+          description: "Description, <a href='http://docs.jdcloud.com/virtual-machines/api/general_parameters'>Refer to the public parameter specification</a>."
       responses:
         200:
           description: OK
@@ -713,7 +713,7 @@ paths:
     ###################### Modify Machine Password######################
     post:
       description: |
-        Modify the virtual machine password and the machine is not allowed to operate when there is no ongoing task. <br>
+        Modify the VM password, and the modification is only available when there is no task in progress for the machine. <br>
         The new password will take effect after the VM is rebooted.
       operationId: modifyInstancePassword
       parameters:
@@ -721,7 +721,7 @@ paths:
           in: query
           type: string
           required: true
-          description: "Password, <a href = 'https://www.jdcloud.com/help/detail/3870/isCatalog/1'>Refer to the public parameter specification</a>."
+          description: "Password, <a href='http://docs.jdcloud.com/virtual-machines/api/general_parameters'>Refer to the public parameter specification</a>."
       responses:
         200:
           description: OK
@@ -740,8 +740,8 @@ paths:
     ###################### Query Machine vnc ######################
     get:
       description: |
-        Get the virtual machine vnc for connection management of virtual machine. <br>
-        The vnc address is valid for 1 hour. If the vnc address is not used within 1 hour after being obtained, it will become invalid automatically and need to be re-acquired again.
+        Get the VM vnc for connection management of virtual machine. <br>
+        The vnc address is valid for 1 hour. If the vnc address is not used within 1 hour after being obtained, it will become invalid automatically and need to be re-acquired.
       operationId: describeInstanceVncUrl
       responses:
         200:
@@ -766,17 +766,17 @@ paths:
           description: "Service unavailable"
 
   "/instances/{instanceId}:resizeInstance":
-    ###################### VM Changes Instance Type ######################
+    ###################### Change Instance Types for Virtual Machines ######################
     post:
       description: |
-          Virtual Machines Change Specification Type
-          The status of the Virtual Machines must be stopped status. <br>
-          The Cloud Disk Service created in 16 years is the machine of the system disk, and the generation and the second generation specification type are not allowed to be adjusted to each other. <br>
-          Local disk (type) is the machine of the system disk, and the first generation and the second generation specification type are not allowed to be adjusted to each other. <br>
-          Machine, generation, and second-generation specification types created using availability group (Ag) do not allow mutual adjustment. <br>
-          The cloud disk service (cloud type) is the machine of the system disk, and the generation and the second generation specification type are allowed to adjust to each other. <br>
-          If the number of elastic network interfaces in the current machine is greater than the number of elastic network interfaces allowed by the specification type, an error is returned. Can query <a href='https://www.jdcloud.com/help/detail/2901/isCatalog/1'> DescribeInstanceTypes</a> interface gives specification information for the specified zone or availability zone. <br>
-          The image used by the current machine needs to support the target specification type to be changed, otherwise the error is returned. Can query <a href="https://www.jdcloud.com/help/detail/2872/isCatalog/1">DescribeImageConstraints</a> Interface obtains specification type limit information for the specified image <br>
+          Change Instance Types for Virtual Machines
+          The virtual machine status must be <b>stopped</b>. <br>
+          For the machines created in 2016 with cloud disk as system disk, the instance types of the first generation and the second generation are not allowed to be adjusted to each other.  <br>
+          For the machines with local disk as system disk, the instance types of the first generation and the second generation are not allowed to be adjusted to each other. <br>
+          For the machines created using availability group (Ag), the instance types of the first generation and the second generation are not allowed to be adjusted to each other. <br>
+          For the machines with cloud disk as system disk, the instance types of the first generation and the second generation are not allowed to be adjusted to each other. <br>
+          If the number of elastic network interfaces in the current machine is greater than the number of elastic network interfaces allowed by the instance type, an error will occur. Can query<a href='http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes'>DescribeInstanceTypes</a>Interface gives instance type information for the specified zone or availability zone. <br>
+          The image used by the current machine needs to support the target instance type to be changed, otherwise an error will occur. Can query <a href='https://www.jdcloud.com/help/detail/2872/isCatalog/1'>DescribeImageConstraints</a>Interface obtains instance type limit information for the specified image <br>
           The instance type cannot be changed when the user is in arrears with the VM fees.
       operationId: resizeInstance
       parameters:
@@ -784,7 +784,7 @@ paths:
           in: query
           type: string
           required: true
-          description: "Instance type, query<a href='https://www.jdcloud.com/help/detail/2901/isCatalog/1'>DescribeInstanceTypes</a> API for the instance type information of the specified zone or AZ."
+          description: "Instance Type, can query<a href='http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes'>DescribeInstanceTypes</a> API for the instance type information of the specified zone or availability zone."
       responses:
         200:
           description: OK
@@ -804,27 +804,27 @@ paths:
     post:
       description: |
         Virtual machine uses the specified image to reset the virtual machine image<br>
-        The status of the Virtual Machines must be stopped status. <br>
-        If the system disk type of the current virtual machine is a WORM type, the replacement image must be an image of the current Disk type;Similarly, if the system disk of the current virtual machine is cloud type, the replacement image must be an image of the clyDisk type. Can query <a href='https://www.jdcloud.com/help/detail/2874/isCatalog/1'> DescribeImages</a> interface gets the image information for the specified zone. <br>
+        The virtual machine status must be <b>stopped</b>. <br>
+        If the system disk of the current virtual machine is of local type, the replacement image must be the localDisk type; similarly, if the system disk of the current virtual machine is of cloud type, the replacement image must be the cloudDisk type. Can query<a href='http://docs.jdcloud.com/virtual-machines/api/describeimages'>DescribeImages</a>Interface gets the image information for the specified zone. <br>
         If you do not specify the image ID, the current machine's original image rebuild system is used by default. <br>
-        The specified image must be able to support the instanceType of the current machine, otherwise an error will occur. Query <a href="https://www.jdcloud.com/help/detail/2872/isCatalog/1">DescribeImageConstraints</a> API for instance type limit information about the specified image.
+        The specified image must be able to support the instance type of the current machine, otherwise an error will occur. Can query<a href='http://docs.jdcloud.com/virtual-machines/api/describeimageconstraints'>DescribeImageConstraints</a>API obtains the type information of the system disk supported by the specified image.
       operationId: rebuildInstance
       parameters:
         - name: password
           in: query
           type: string
           required: true
-          description: "VM password, <a href='https://www.jdcloud.com/help/detail/3870/isCatalog/1'>Refer to the public parameter specification</a>."
+          description: "VM password, <a href='http://docs.jdcloud.com/virtual-machines/api/general_parameters'>Refer to the public parameter specification</a>."
         - name: imageId
           in: query
           type: string
-          description: "Image ID. Can query <a href = 'https://www.jdcloud.com/help/detail/2874/isCatalog/1'> DescribeImages</a> API for the image information of the specified zone."
+          description: "Image ID. Can query<a href='http://docs.jdcloud.com/virtual-machines/api/describeimages'>DescribeImages</a>API obtains the image information of the specified zone."
         - name: keyNames
           in: query
           type: array
           items:
             type: string
-          description: "The key pair name; only one is currently supported."
+          description: "Key Pair Name; only one is currently supported. Only Linux system supports specification."
       responses:
         200:
           description: OK

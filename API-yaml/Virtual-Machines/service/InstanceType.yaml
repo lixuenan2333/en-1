@@ -20,8 +20,8 @@ paths:
           items:
             $ref: "../../common/model/Filter.yaml#/definitions/filter"
           description: | 
-            instanceTypes - Instance type, exact match, multiple support
-            az-AZ, exact match, multiple supported
+            instanceTypes - Instance Type, exact match, multiple support
+            az-Availability Zone, exact match, multiple supported
       responses:
         200:
           description: OK

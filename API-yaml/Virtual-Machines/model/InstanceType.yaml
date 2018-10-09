@@ -8,7 +8,7 @@ definitions:
         description: "Instance Type"
       instanceType:
         type: string
-        description: "Instance type, such as g.b1.2xlarge"
+        description: "Instance Type, such as g.b1.2xlarge"
       cpu:
         type: integer
         description: "CPU Number"
@@ -25,4 +25,12 @@ definitions:
         type: array
         items:
           $ref: "./InstanceTypeState.yaml#/definitions/instanceTypeState"
-        description: "Instance Type Status"
+        description: "Type Status"
+      gpu:
+        $ref: "./Gpu.yaml#/definitions/gpu"
+        description: "Gpu configuration"
+      localDisks:
+        type: array
+        items:
+          $ref: "./LocalDisk.yaml#/definitions/localDisk"
+        description: "Configuration of local cache disk, only available for Gpu specification"

@@ -8,4 +8,4 @@ definitions:
         description: "Network device Index, and the primary network interface can only be 1"
       networkInterface:
         $ref: "../../vpc/model/NetworkInterfaceSpec.yaml#/definitions/networkInterfaceSpec"
-        description: "Network Interface API Instance Type"
+        description: "Network Interface API Specification"

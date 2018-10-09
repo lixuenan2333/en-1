@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: "v1"
   title: Image
-  description: "related interfaces on machine image operations"
+  description: "Related interfaces on machine image operations"
 
 basePath: /regions/{regionId}
 
@@ -40,7 +40,7 @@ paths:
     ###################### Delete image API ######################
     delete:
       description: |
-        Delete a private image that only allows you to operate your personal private image.
+        Delete a private image that only allows you to operate your personal private image. <br>
         If the image is shared to other users, the image can be deleted only when the sharing is released.
       operationId: deleteImage
       responses:
@@ -87,7 +87,7 @@ paths:
         - name: status
           in: query
           type: string
-          description: "<a href='https://www.jdcloud.com/help/detail/3871/isCatalog/1'>refer to image status</a>"
+          description: "<a href='http://docs.jdcloud.com/virtual-machines/api/image_status'>Refer to image status</a>"
         - name: pageNumber
           in: query
           type: integer
@@ -132,7 +132,7 @@ paths:
     get:
       description: |
         Query the instance type limit of the image. <br>
-        This API allows you to view the type of specifications that are not supported by the image. Only the public image, the third-party image has a specification type restriction, and the private image of the individual does not have this limit.
+        This API allows you to view the instance types that are not supported by the image. Only the public image and the third-party image have restrictions for instance type, and the private image of the individual does not have this limit.
       operationId: describeImageConstraints
       responses:
         200:
@@ -163,8 +163,8 @@ paths:
     ###################### Batch Query Image Limits ######################
     get:
       description: |
-        Batch query image specification type constraints. <br>
-        This API allows you to view the type of specifications that are not supported by the image. Only the public image, the third-party image has a specification type restriction, and the private image of the individual does not have this limit.
+        Batch query image instance type. <br>
+        This API allows you to view the instance types that are not supported by the image. Only the public image and the third-party image have restrictions for instance type, and the private image of the individual does not have this limit.
       operationId: describeImageConstraintsBatch
       parameters:
         - name: ids
@@ -269,7 +269,7 @@ paths:
                 properties:
                   pins:
                     type: array
-                    description: "user Pin list"
+                    description: "User Pin List"
                     items:
                       type: string
               requestId:
@@ -317,11 +317,11 @@ paths:
           description: "Service unavailable"
 
   "/images:copyImages":
-    ###################### The inter-zone image replication ######################
+    ###################### Image Cross-region Replication ######################
     post:
       description: |
-        Image inter-domain replication, copy private images to other regions, allowing  you to operate your private image only. <br>
-        Only images of the Cloud Disk Service of system disk are supported.
+        Image cross-region replication, copy private images to other regions, allowing  you to operate your private image only. <br>
+        Only the image operations of cloud system disk with rootDeviceType as cloudDisk are supported.
       operationId: copyImages
       parameters:
         - name: sourceImageIds
@@ -371,11 +371,11 @@ paths:
         - name: name
           in: query
           type: string
-          description: "Name, <a href='https://www.jdcloud.com/help/detail/3870/isCatalog/1'>Refer to the public parameter specification </a>."
+          description: "Name, <a href='http://docs.jdcloud.com/virtual-machines/api/general_parameters'>Refer to the public parameter specification </a>."
         - name: description
           in: query
           type: string
-          description: "Description, <a href='https://www.jdcloud.com/help/detail/3870/isCatalog/1'>Refer to the public parameter specification</a>."
+          description: "Description, <a href='http://docs.jdcloud.com/virtual-machines/api/general_parameters'>Refer to the public parameter specification</a>."
       responses:
         200:
           description: OK

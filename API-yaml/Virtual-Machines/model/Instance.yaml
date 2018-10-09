@@ -22,16 +22,16 @@ definitions:
         description: "ID of the subnet to which the primary network interface belongs"
       privateIpAddress:
         type: string
-        description: "IP address of primary network interface"
+        description: "Primary IP address of primary network interface"
       elasticIpId:
         type: string
-        description: "The ID of the primary network interface of primary IP associating EIP"
+        description: "The ID of the primary IP of primary network interface associating EIP"
       elasticIpAddress:
         type: string
-        description: "The address of the primary network interface of primary IP associating EIP"
+        description: "The address of the primary IP of primary network interface associating EIP"
       status:
         type: string
-        description: "Virtual machine status,<a href='https://www.jdcloud.com/help/detail/3869/isCatalog/1'>refer to virtual machine status</a>"
+        description: "Virtual Machine Status,<a href='http://docs.jdcloud.com/virtual-machines/api/vm_status'>Refer to virtual machine status</a>"
       description:
         type: string
         description: "VM Description"
@@ -48,12 +48,12 @@ definitions:
         description: "Data Disk Configuration"
       primaryNetworkInterface:
         $ref: "./InstanceNetworkInterfaceAttachment.yaml#/definitions/instanceNetworkInterfaceAttachment"
-        description: "Primary Network Interface Instance Type"
+        description: "Primary Network Interface Configuration"
       secondaryNetworkInterfaces:
         type: array
         items:
           $ref: "./InstanceNetworkInterfaceAttachment.yaml#/definitions/instanceNetworkInterfaceAttachment"
-        description: "Secondary Network Interface Instance Type"
+        description: "Secondary Network Interface Configuration"
       launchTime:
         type: string
         format: date-time
@@ -72,7 +72,7 @@ definitions:
         description: "Billing Information"
       ag:
         $ref: "./Ag.yaml#/definitions/ag"
-        description: "AG, where an AG is used to create a VM, an AG name can be displayed here"
+        description: "Availability Group, where an AG is used to create VM, the AG name can be displayed here"
       faultDomain:
         type: string
         description: "Error Domains in AGs"

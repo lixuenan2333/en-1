@@ -22,7 +22,7 @@ definitions:
         type: array
         items:
           $ref: "./InstanceTemplateDiskAttachment.yaml#/definitions/instanceTemplateDiskAttachment"
-        description: "The data disk information. The VM of the local disk as system disk can be attached with 8 data disks. The VM of the Cloud Disk Service can be attached with 7 data disks."
+        description: "The data disk information. The virtual machine with local disk as system disk can be attached with 8 data disks, and 7 data disks for the virtual machine with cloud disk as system disk."
       primaryNetworkInterface:
         $ref: "./InstanceTemplateNetworkInterfaceAttachmentSpec.yaml#/definitions/instanceTemplateNetworkInterfaceAttachmentSpec"
         description: "Primary Network Interface Information"
@@ -34,4 +34,4 @@ definitions:
         items:
           type: string
         minItems: 1
-        description: "The key pair name; only one is supported  currently"
+        description: "Key Pair Name; only one is supported  currently"

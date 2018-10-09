@@ -22,7 +22,7 @@ definitions:
 #        type: array
 #        items:
 #          type: string
-# description: AZ
+# description: Availability Zone
 #      count:
 #        type: integer
 # description: Number of Instances

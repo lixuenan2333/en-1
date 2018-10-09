@@ -8,4 +8,4 @@ definitions:
         description: "VM ID"
       privateIpAddress:
         type: string
-        description: "The primary IP address in the primary network interface"
+        description: "Primary intranet IP of primary network interface"

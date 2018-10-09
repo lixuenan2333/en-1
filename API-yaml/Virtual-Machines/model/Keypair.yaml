@@ -9,3 +9,6 @@ definitions:
       keyFingerprint:
         type: string
         description: "The fingerprint of the key pair, based on the public key fingerprint format defined in RFC4716, the MD5 information digest algorithm is adopted."
+      createTime:
+        type: string
+        description: "Creation Time"

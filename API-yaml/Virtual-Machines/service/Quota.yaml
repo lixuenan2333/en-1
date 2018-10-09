@@ -11,7 +11,7 @@ paths:
     ###################### Query Quota ######################
     get:
       description: |
-        Query quota, support: VM, image, key pair, template
+        Query quota, support: VM, image, key pair, template, image sharing
       operationId: describeQuotas
       parameters:
         - name: filters
@@ -20,7 +20,11 @@ paths:
           items:
             $ref: "../../common/model/Filter.yaml#/definitions/filter"
           description: | 
-            resourceTypes - Resource types, multiple support [instance, keyair, image, instanceTemplate]
+            resourceTypes - Resource Types, multiple support [instance, keypair, image, instanceTemplate, imageShare]
+        - name: imageId
+          in: query
+          type: string
+          description: "Private image Id, this parameter must be uploaded when querying imageShare quota"
       responses:
         200:
           description: OK
@@ -30,7 +34,7 @@ paths:
                 properties:
                   quotas:
                     type: array
-                    description: "Quota list"
+                    description: "Quota List"
                     items:
                       $ref: "../model/Quota.yaml#/definitions/quota"
               requestId:

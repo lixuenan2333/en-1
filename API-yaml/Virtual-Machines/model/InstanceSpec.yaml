@@ -16,42 +16,42 @@ definitions:
         description: "The AZ to which the VM belongs."
       instanceType:
         type: string
-        description: "Specification Type. Can query <a href = 'https://www.jdcloud.com/help/detail/2901/isCatalog/1'> DescribeInstanceTypes</a> API for instance type information of the specified zone or AZ."
+        description: "Instance Type. Can query <a href='http://docs.jdcloud.com/virtual-machines/api/describeinstancetypes'>DescribeInstanceTypes</a> API for instance type information of the specified zone or availability zone."
       imageId:
         type: string
-        description: "Image ID. Can query <a href = 'https://www.jdcloud.com/help/detail/2874/isCatalog/1'> DescribeImages</a> API for the image information of the specified zone."
+        description: "Image ID. Can query<a href='http://docs.jdcloud.com/virtual-machines/api/describeimages'>DescribeImages</a>API obtains the image information of the specified zone."
       name:
         type: string
-        description: "VM name, <a href ='https://www.jdcloud.com/help/detail/3870/isCatalog/1'>Refer to the public parameter specification</a>."
+        description: "VM name, <a href='http://docs.jdcloud.com/virtual-machines/api/general_parameters'>Refer to the public parameter specification</a>."
       password:
         type: string
-        description: "Password, <a href = 'https://www.jdcloud.com/help/detail/3870/isCatalog/1'>Refer to the public parameter specification</a>."
+        description: "Password, <a href='http://docs.jdcloud.com/virtual-machines/api/general_parameters'>Refer to the public parameter specification</a>."
       keyNames:
         type: array
         items:
           type: string
-        description: "The key pair name currently only supports incoming one."
+        description: "Key Pair Name, currently only supports incoming one."
       elasticIp:
         $ref: "../../vpc/model/ElasticIpSpec.yaml#/definitions/elasticIpSpec"
         description: "EIP specification associated with the primary IP of the primary network interface"
       primaryNetworkInterface:
         $ref: "./InstanceNetworkInterfaceAttachmentSpec.yaml#/definitions/instanceNetworkInterfaceAttachmentSpec"
-        description: "Primary Network Interface Instance Type Information"
+        description: "Primary Network Interface Configuration Information"
       systemDisk:
         $ref: "./InstanceDiskAttachmentSpec.yaml#/definitions/instanceDiskAttachmentSpec"
-        description: "System Disk Instance Type Information"
+        description: "System Disk Configuration Information"
       dataDisks:
         type: array
         items:
           $ref: "./InstanceDiskAttachmentSpec.yaml#/definitions/instanceDiskAttachmentSpec"
-        description: "The instance type information of the data disk. The VM of local disk as the system disk can attach 8 data disks, and the VM of the Cloud Disk Service as the system disk can attach 7 data disks."
+        description: "The configuration information of the data disk. The virtual machine with local disk as system disk can be attached with 8 data disks, and 7 data disks for the virtual machine with cloud disk as system disk."
       charge:
         $ref: "../../charge/model/ChargeSpec.yaml#/definitions/chargeSpec"
         description: |
           Billing Configuration
-          The VM does not support paying by consumption. The default is to pay by configuration.
-          In the case of packaging a data disk, the billing method of the data disk can only be consistent with the VM.
-          In the case of packaging EIP, if the public IP is not specified to be paid by consumption, the IP billing mode of the public network can only be consistent with the VM.
+          The VM does not support pay by consumption. The default is pay by configuration.
+          In the case of creating a data disk in packages, the billing method of the data disk can only be consistent with the VM.
+          In the case of creating EIP in packages, if it is not specified as pay by consumption, the billing method of the public IP can only be consistent with the VM.
       description:
         type: string
-        description: "Machine Description, <a href = 'https://www.jdcloud.com/help/detail/3870/isCatalog/1 '> Refer to the public parameter specification</a>."
+        description: "Machine Description, <a href='http://docs.jdcloud.com/virtual-machines/api/general_parameters'>Refer to the public parameter specification</a>."

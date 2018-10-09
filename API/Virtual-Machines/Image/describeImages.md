@@ -68,6 +68,7 @@ https://vm.jdcloud-api.com/v1/regions/{regionId}/images
 |**deviceName**|String|Data disk logical attaching point, value range: vda, vdb, vdc, vdd, vde, vdb, vdg, vdh, vdi|
 |**diskCategory**|String|Disk classification, the local disk or data disk is taken.<br>The system disk supports local disk or cloud disk. The system disk selects local type, and the user must use the image localDisk type; if the system disk selects the cloud type, the user must use the image of the cloudDisk type.<br>The data disk supports cloud disk only.<br>|
 |**localDisk**|LocalDisk|Local Disk Instance Type|
+|**status**|String|Data disk attach status, value range:attaching,detaching,attached,detached,error_attach,error_detach|
 ### Disk
 |Name|Type|Description|
 |---|---|---|
@@ -117,7 +118,7 @@ https://vm.jdcloud-api.com/v1/regions/{regionId}/images
 |---|---|
 |**400**|Invalid parameter|
 |**401**|Authentication failed|
-|**404**|Not Found  |
+|**404**|Not found|
 |**503**|Service unavailable|
 |**200**|OK|
 |**500**|Internal server error|

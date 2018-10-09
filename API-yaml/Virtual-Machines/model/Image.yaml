@@ -26,10 +26,10 @@ definitions:
         description: "Image source, jcloud: public image, marketplace: image marketplace, image self: user's own image share: image shared by other users"
       osType:
         type: string
-        description: "OS type. Value: [windows, linux]"
+        description: "OS Type. Value: [windows, linux]"
       status:
         type: string
-        description: "<a href='https://www.jdcloud.com/help/detail/3871/isCatalog/1'>refer to image status</a>"
+        description: "<a href='http://docs.jdcloud.com/virtual-machines/api/image_status'>Refer to image status</a>"
       createTime:
         type: string
         format: date-time
@@ -50,10 +50,10 @@ definitions:
         description: "Package Image Data Disk Mapping Information"
       snapshotId:
         type: string
-        description: "The snapshot ID of the Cloud Disk Service for creating the system disk of the cloud disk, when the system disk type is image of the local disk, this parameter is blank."
+        description: "The cloud disk snapshot ID used for creating the cloud system disk. When the system disk type is image of the local disk, this parameter is blank."
       rootDeviceType:
         type: string
         description: "The system disk type supported by the image. localDisk: Support system disk for this site.cloudDisk: Support cloud disk system disk"
       progress:
         type: string
-        description: "Progress in image replication, in percentage, for example: 80"
+        description: "Progress in image replication and transition, value only, in percentage"
