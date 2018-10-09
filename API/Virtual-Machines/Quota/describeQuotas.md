@@ -19,6 +19,7 @@ https://vm.jdcloud-api.com/v1/regions/{regionId}/quotas
 |Name|Type|Required or not|Default value|Description|
 |---|---|---|---|---|
 |**filters**|Filter[]|False| |resourceTypes - Resource types, multiple support [instance, keyair, image, instanceTemplate]<br>|
+|**imageId**|String|False| |Private image Id, this parameter must be uploaded when querying imageShare quota|
 
 ### Filter
 |Name|Type|Required or not|Default value|Description|
