@@ -27,6 +27,7 @@ paths:
         - ImageStyle
       description: "Image Style List"
       operationId: listImageStyle
+      x-jdcloud-internal: true
       parameters:
         - name: styleName
           in: query
@@ -57,6 +58,7 @@ paths:
         - ImageStyle
       description: "Add Image Style"
       operationId: createImageStyle
+      x-jdcloud-internal: true
       parameters:
         - name: imageStyle
           in: body
@@ -88,6 +90,7 @@ paths:
         - ImageStyle
       description: "Image Style Details"
       operationId: getImageStyle
+      x-jdcloud-internal: true
       responses:
         '200':
           description: successful operation
@@ -103,6 +106,7 @@ paths:
         - ImageStyle
       description: "Delete Image Style"
       operationId: deleteImageStyle
+      x-jdcloud-internal: true
       responses:
         '200':
           description: successful operation
@@ -116,6 +120,7 @@ paths:
         - ImageStyle
       description: "Modify Image Style"
       operationId: updateImageStyle
+      x-jdcloud-internal: true
       parameters:
         - name: imageStyle
           in: body
@@ -138,6 +143,7 @@ paths:
         - ImageStyle
       description: "Total Number of Image Styles"
       operationId: countImageStyle
+      x-jdcloud-internal: true
       parameters:
         - name: styleName
           in: query

@@ -42,7 +42,7 @@ paths:
           in: query
           type: integer
           required: false
-          description: "Paging Size: 20 by default; value range [10, 100]"
+          description: "Paging Size: 10 by default; value range [10, 100]"
         - name: name
           in: query
           type: string
@@ -89,7 +89,7 @@ paths:
       parameters:
         - name: cCSpec
           in: body
-          description: "cc Parameter"
+          description: "CC Parameter"
           required: true
           schema:
             $ref: "../model/CcSpec.yaml#/definitions/CCSpec"
@@ -133,7 +133,7 @@ paths:
 
   /instances/{instanceId}:setUrlWhiteList:
     post:
-      description: "Set the instance url white list"
+      description: "Set the instance Url white list"
       operationId: modifyInstanceUrlWhiteList
       parameters:
         - name: urlWhiteList
@@ -156,7 +156,7 @@ paths:
 
   /instances/{instanceId}:enableUrlWhiteList:
     post:
-      description: "Enable the instance url white list"
+      description: "Enable the instance Url white list"
       operationId: enableInstanceUrlWhiteList
       responses:
         200:
@@ -170,7 +170,7 @@ paths:
 
   /instances/{instanceId}:disableUrlWhiteList:
     post:
-      description: "Disable the instance url white list"
+      description: "Disable the instance Url white list"
       operationId: disableInstanceUrlWhiteList
       responses:
         200:
@@ -184,14 +184,15 @@ paths:
 
   /instances/{instanceId}:rename:
     post:
-      description: "Modify the instance name"
+      description: "Modify instance name"
       operationId: modifyInstanceName
       parameters:
-        - name: name
-          in: query
-          description: "New Instance Name"
+        - name: instanceSpec
+          in: body
+          description: "Modify instance name request parameters by providing name field of InstanceSpec only"
           required: true
-          type: string
+          schema:
+            $ref: "../model/InstanceSpec.yaml#/definitions/InstanceSpec"
       responses:
         200:
           description: OK
@@ -207,19 +208,25 @@ paths:
       description: "Set the instance IP blacklist"
       operationId: modifyInstanceIpBlackList
       parameters:
-        - name: ipBlackList
+        - name: ipBwListSpec
           in: body
-          description: "IP Blacklist"
           required: true
           schema:
-            type: array
-            items:
-              type: string
+            $ref: "../model/IpBwListSpec.yaml#/definitions/IpBwListSpec"
+          description: "Set IP Blacklist Request"
       responses:
         200:
           description: OK
           schema:
             properties:
+              result:
+                properties:
+                  msgList:
+                    type: array
+                    items:
+                      $ref: "../model/BwRepeatMsg.yaml#/definitions/BwRepeatMsg"
+                  status:
+                    $ref: "../model/Status.yaml#/definitions/Status"
               requestId:
                 type: string
         404:
@@ -250,28 +257,36 @@ paths:
                 type: string
         404:
           description: NOT_FOUND
+
   /instances/{instanceId}:setIpWhiteList:
     post:
       description: "Set the instance IP white list"
       operationId: modifyInstanceIpWhiteList
       parameters:
-        - name: ipWhiteList
+        - name: ipBwListSpec
           in: body
-          description: "IP White List"
           required: true
           schema:
-            type: array
-            items:
-              type: string
+            $ref: "../model/IpBwListSpec.yaml#/definitions/IpBwListSpec"
+          description: "Set IP Blacklist Request"
       responses:
         200:
           description: OK
           schema:
             properties:
+              result:
+                properties:
+                  msgList:
+                    type: array
+                    items:
+                      $ref: "../model/BwRepeatMsg.yaml#/definitions/BwRepeatMsg"
+                  status:
+                    $ref: "../model/Status.yaml#/definitions/Status"
               requestId:
                 type: string
         404:
           description: NOT_FOUND
+
   /instances/{instanceId}:enableIpWhiteList:
     post:
       description: "Enable the instance IP white list"
@@ -285,6 +300,7 @@ paths:
                 type: string
         404:
           description: NOT_FOUND
+
   /instances/{instanceId}:disableIpWhiteList:
     post:
       description: "Disable the instance IP white list"
@@ -299,10 +315,10 @@ paths:
         404:
           description: NOT_FOUND
 
-  /instances/{instanceId}:enableCcObserverMode:
+  /instances/{instanceId}:enableCCObserverMode:
     post:
       description: "Enable the observer mode of instance CC defense"
-      operationId: enableCcObserverMode
+      operationId: enableCCObserverMode
       responses:
         200:
           description: OK
@@ -313,10 +329,10 @@ paths:
         404:
           description: NOT_FOUND
 
-  /instances/{instanceId}:disableCcObserverMode:
+  /instances/{instanceId}:disableCCObserverMode:
     post:
       description: "Disable the observer mode of instance CC defense"
-      operationId: disableCcObserverMode
+      operationId: disableCCObserverMode
       responses:
         200:
           description: OK
@@ -327,10 +343,10 @@ paths:
         404:
           description: NOT_FOUND
 
-  /instances/{instanceId}:enableCcIpLimit:
+  /instances/{instanceId}:enableCCIpLimit:
     post:
       description: "Enable the speed limit of each IP of CC defense"
-      operationId: enableCcIpLimit
+      operationId: enableCCIpLimit
       responses:
         200:
           description: OK
@@ -341,10 +357,10 @@ paths:
         404:
           description: NOT_FOUND
 
-  /instances/{instanceId}:disableCcIpLimit:
+  /instances/{instanceId}:disableCCIpLimit:
     post:
       description: "Disable the speed limit of each IP of CC defense"
-      operationId: disableCcIpLimit
+      operationId: disableCCIpLimit
       responses:
         200:
           description: OK
@@ -355,14 +371,14 @@ paths:
         404:
           description: NOT_FOUND
 
-  /instances/{instanceId}:setCcIpLimit:
+  /instances/{instanceId}:setCCIpLimit:
     post:
-      description: "Set the speed limit of each Ip of instance CC defense"
-      operationId: setCcIpLimit
+      description: "Set the speed limit of each IP of instance CC defense"
+      operationId: setCCIpLimit
       parameters:
         - name: cCSpec
           in: body
-          description: "cc Parameter"
+          description: "CC Parameter"
           required: true
           schema:
             $ref: "../model/CcIpLimitSpec.yaml#/definitions/CcIpLimitSpec"
@@ -521,7 +537,7 @@ paths:
                 properties:
                   data:
                     type: boolean
-                    description: "Detection Result, True Means Legal, False Means Illegal"
+                    description: "Detection Result, true Means Legal, false Means Illegal"
               requestId:
                 type: string
 

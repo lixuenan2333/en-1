@@ -19,10 +19,10 @@ definitions:
         type: array
         items:
           $ref: "./SecurityGroupSimple.yaml#/definitions/securityGroupSimple"
-          description: "List of Security Groups"
+          description: "Security Group List"
       sanityCheck:
         type: integer
-        description: "Source and destination IP address verification with a value of 0 or 1"
+        description: "Source and target IP address verification, with value 0 or 1"
       primaryIp:
         $ref: "../../vpc/model/NetworkInterfacePrivateIp.yaml#/definitions/networkInterfacePrivateIp"
         description: "Network Interface Primary IP"

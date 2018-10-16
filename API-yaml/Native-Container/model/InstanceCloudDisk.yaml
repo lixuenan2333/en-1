@@ -8,7 +8,7 @@ definitions:
     properties:
         diskId:
           type: string
-          description: "Cloud Disk Service ID"
+          description: "Cloud Disk ID"
         az:
           type: string
           description: "Corresponding AZ"

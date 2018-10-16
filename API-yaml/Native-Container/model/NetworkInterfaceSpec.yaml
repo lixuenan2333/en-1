@@ -17,7 +17,7 @@ definitions:
         description: "Availability Zone, User’s Default Availability Zone"
       primaryIpAddress:
         type: string  
-        description: "Primary IP of Network Interface"
+        description: "Network Interface Primary IP"
       secondaryIpAddresses:
         type: array
         items: 

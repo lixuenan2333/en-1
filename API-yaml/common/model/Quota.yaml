@@ -12,4 +12,4 @@ definitions:
         description: "Quota"
       used:
         type: integer
-        description: "Number Used"
+        description: "Used Number"

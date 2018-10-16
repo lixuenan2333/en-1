@@ -10,7 +10,7 @@ paths:
     post:
       description: "Create role"
       operationId: createRole
-      x-jdcloud-internal: false
+      x-jdcloud-internal: true
       parameters:
         - name: createRoleInfo
           in: body
@@ -26,16 +26,18 @@ paths:
             properties:
               requestId:
                 type: string
-              roleInfo:
-                 $ref: "../model/RoleInfo.yaml#/definitions/roleInfo"
-                 description: "Role Information"
+              result:
+                properties:
+                  roleInfo:
+                     $ref: "../model/RoleInfo.yaml#/definitions/roleInfo"
+                     description: "Role Information"
 
   "/role/{roleName}":
    ###################### Modify Role ######################
     put:
       description: "Modify basic information of the role"
       operationId: updateRole
-      x-jdcloud-internal: false
+      x-jdcloud-internal: true
       parameters:
         - name: updateRoleInfo
           in: body
@@ -56,7 +58,7 @@ paths:
     get:
       description: "Query role details"
       operationId: describeRole
-      x-jdcloud-internal: false
+      x-jdcloud-internal: true
       responses:
         200:
           description: OK
@@ -75,7 +77,7 @@ paths:
     delete:
       description: "Delete role"
       operationId: deleteRole
-      x-jdcloud-internal: false
+      x-jdcloud-internal: true
       responses:
         200:
           description: OK
@@ -90,7 +92,7 @@ paths:
     put:
       description: "Modify role built-in policy"
       operationId: updateAssumeRolePolicy
-      x-jdcloud-internal: false
+      x-jdcloud-internal: true
       parameters:
         - name: updateAssumeRolePolicyInfo
           in: body
@@ -112,24 +114,26 @@ paths:
     get:
       description: "Query role list"
       operationId: describeRoles
-      x-jdcloud-internal: false
+      x-jdcloud-internal: true
       parameters:
         - name: pageNumber
           in: query
           type: integer
           description: "Page"
-          required: true
+          required: false
+          default: 1
         - name: pageSize
           in: query
           type: integer
-          description: "Number of Roles Displayed on Each Page"
-          required: true
+          description: "Number of entries displayed on each page: [10~100], 50 entries by default"
+          required: false
+          default: 50
         - name: pathPrefix
           in: query
           type: string
           description: "Path Prefix"
           required: false
-        - name: roleNamePrefix
+        - name: roleName
           in: query
           type: string
           description: "Role Name Prefix"
@@ -158,22 +162,48 @@ paths:
               requestId:
                 type: string
 
-  "/role/{roleName}/policy:attachRolePolicy":
+  "/role/{roleName}/policy/{policyName}":
    ###################### Associate Policy for Role ######################
     post:
-      description: "Associate policy for pole"
+      description: "Associate Policy for Role"
       operationId: attachRolePolicy
-      x-jdcloud-internal: false
+      x-jdcloud-internal: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              requestId:
+                type: string
+
+   ###################### Associate Policy for Role ######################
+    delete:
+      description: "Associate Policy for Role"
+      operationId: detachRolePolicy
+      x-jdcloud-internal: true
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              requestId:
+                type: string
+
+  "/role/{roleName}/policy:attachRolePolicies":
+   ###################### Associate policies for roles in batches ######################
+    post:
+      description: "Associate Policy for Role"
+      operationId: attachRolePolicies
+      x-jdcloud-internal: true
       parameters:
-        - name: attachRolePolicyInfo
+        - name: attachRolePoliciesInfo
           in: body
-          description: "Role Association Policy Information"
+          description: Role Permission Information
           required: true
           schema:
-            properties:
-              policyJrn:
-                type: string
-                description: "Policy jrn"
+            $ref: "../model/AttachRolePoliciesInfo.yaml#/definitions/attachRolePoliciesInfo"
       responses:
         200:
           description: OK
@@ -188,18 +218,20 @@ paths:
     get:
       description: "Query Role Authorization Policy List"
       operationId: describeRolePolicies
-      x-jdcloud-internal: false
+      x-jdcloud-internal: true
       parameters:
         - name: pageNumber
           type: integer
           in: query
           description: "Page"
-          required: true
+          default: 1
+          required: false
         - name: pageSize
           type: integer
           in: query
-          description: "Number of Roles Displayed on Each Page"
-          required: true
+          description: "Number of entries displayed on each page: [10~100], 50 entries by default"
+          default: 50
+          required: false
         - name: keyword
           type: string
           in: query
@@ -226,48 +258,19 @@ paths:
                     items:
                       $ref: "../model/RolePolicy.yaml#/definitions/rolePolicy"
                     description: "Role Authorization List"
-
               requestId:
                 type: string
-
-
-  "/role/{roleName}/policy:detachRolePolicy":
-   ###################### Disassociate Policy for Role ######################
-    post:
-      description: "Associate policy for pole"
-      operationId: detachRolePolicy
-      x-jdcloud-internal: false
-      parameters:
-        - name: detachRolePolicyInfo
-          in: body
-          description: "Role Association Policy Information"
-          required: true
-          schema:
-            properties:
-              policyJrn:
-                type: string
-                description: "Policy jrn"
-      responses:
-        200:
-          description: OK
-          schema:
-            type: object
-            properties:
-              requestId:
-                type: string
-
-
 
 # Path General Parameters
 parameters:
-  regionId:
-    name: regionId
+  roleName:
+    name: roleName
     in: path
     required: true
     type: string
     description: Region ID
-  roleName:
-    name: roleName
+  policyName:
+    name: policyName
     in: path
     required: true
     type: string

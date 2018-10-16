@@ -27,4 +27,4 @@ definitions:
         description: "Data disk logical attaching point, value range: vda, vdb, vdc, vdd, vde, vdb, vdg, vdh, vdi"
       status:
         type: string
-        description: Data disk attach status, value range: attaching,detaching,attached,detached,error_attach,error_detach
+        description: "Data disk attach status, value range: attaching,detaching,attached,detached,error_attach,error_detach"

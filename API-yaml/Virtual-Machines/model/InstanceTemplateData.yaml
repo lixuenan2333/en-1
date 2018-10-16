@@ -8,7 +8,7 @@ definitions:
         description: "Instance Type"
       vpcId:
         type: string
-        description: "ID of the VPC to which the primary network interface belongs"
+        description: "ID of Primary Network Interface’s VPC "
       imageId:
         type: string
         description: "Image ID"

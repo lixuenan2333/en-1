@@ -8,4 +8,4 @@ definitions:
         description: "Wrong Encoding"
       errorMsg:
         type: string
-        description: "Wrong Information"
+        description: "Error Information"
