@@ -4,7 +4,7 @@ definitions:
     x-jdcloud-module: nc
     x-jdcloud-internal: false
     type: object
-    description: container
+    description: "Container"
     properties:
       containerId:
         type: string  
@@ -14,10 +14,10 @@ definitions:
         description: "Container Status " 
       instanceType:
         type: string  
-        description: "Instance Type" 
+        description: "Instance Type Family " 
       az:
         type: string  
-        description: "Availability Zone" 
+        description: "Availability Zone " 
       name:
         type: string  
         description: "Container Name" 
@@ -72,7 +72,7 @@ definitions:
         description: "ID of Primary Network Interface’s Subnet " 
       privateIpAddress:
         type: string  
-        description: "Primary IP address of primary network interface" 
+        description: "Primary IP Address of Primary Network Interface " 
       elasticIpId:
         type: string  
         description: "Elastic IP ID Associated to Primary IP of Primary Network Interface " 

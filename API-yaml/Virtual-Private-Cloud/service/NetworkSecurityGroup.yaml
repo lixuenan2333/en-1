@@ -39,7 +39,7 @@ paths:
            description: |
                   networkSecurityGroupIds - Security group ID list, support multiple IDs
                   networkSecurityGroupNames - Security Group name list, support multiple names
-                  vpcId	- VPC ID of Security Group, support single Id
+                  VPCId	- VPC ID of Security Group, support single Id
 
        responses:
          200:
@@ -266,61 +266,6 @@ paths:
            description: "SecurityGroup or SecurityGroupRule not found"
         500:
            description: Internal server error
-  
-  "/networkSecurityGroups/{networkSecurityGroupId}:associateSecurityGroup":
-     post:
-       description: "Associate security group APIs"
-       operationId: associateSecurityGroup
-       x-jdcloud-internal: true
-       parameters:
-        - name: networkInterfaceIds
-          in: body
-          required: true
-          description: "List of Elastic Network Interface IDs to be associated with security groups, at most 5 security groups to be associated with each Elastic Network Interface"
-          schema:
-            type: array
-            items:
-              type: string
-       
-       responses:
-         200:
-           description: Successful operation
-           schema:
-             type: object
-             properties:
-               requestId:
-                 description: "Request ID"
-                 type: string
-         400:
-           description: Request parameter x.y.z is 'xxx', expected one of [yyy,zzz]
-         404:
-           description: Resource not found
-
-  "/networkSecurityGroups/{networkSecurityGroupId}:disassociateSecurityGroup":
-     post:
-       description: "Disassociate Security Group APIs"
-       operationId: disassociateSecurityGroup
-       x-jdcloud-internal: true
-       parameters:
-        - name: networkInterfaceId
-          in: query
-          required: true
-          type: string
-          description: "Elastic Network Interface ID to Be Disassociated by Security Groups"
-
-       responses:
-         200:
-           description: "Successful operation"
-           schema:
-             type: object
-             properties:
-               requestId:
-                 description: "Request ID"
-                 type: string
-         400:
-           description: Request parameter x.y.z is 'xxx', expected one of [yyy,zzz]
-         404:
-           description: Resource not found
 
 parameters:
   regionId:

@@ -31,7 +31,7 @@ paths:
                             description: True is success, false is failure
                           message:
                             type: string
-                            description: "Description Information"
+                            description: Description Information
                           data:
                             type: string
                             description: Map<String,String>>, the serialized character string needs to be reconverted before use. Key is deviceId, value is crowd package Id

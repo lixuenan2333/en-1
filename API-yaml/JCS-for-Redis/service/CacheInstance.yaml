@@ -296,7 +296,7 @@ paths:
           in: query
           required: true
           type: integer
-          description: "Page size; it is 20 by default; value range[10, 100]"
+          description: "Paging Size; 20 by default; Value range[10, 100] "
         - name: baseId
           in: query
           required: false

@@ -7,6 +7,28 @@ info:
 basePath: /regions/{regionId}
 
 paths:
+  "/subUser":
+    ###################### Create Sub-accounts######################
+    post:
+      description: "Create sub-accounts"
+      operationId: createSubuser
+      x-jdcloud-internal: false
+      parameters:
+        - name: createSubUserInfo
+          in: body
+          description: "Sub-account Information"
+          required: true
+          schema:
+            $ref: "../model/CreateSubUserInfo.yaml#/definitions/createSubUserInfo"
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              requestId:
+                type: string
+
   "/userAccessKeys":
     ###################### Obtaining User’s All AccessKeys ######################
     get:
@@ -23,7 +45,7 @@ paths:
                 properties:
                   userAccessKeys:
                    type: array
-                   description: "userAccessKey list"
+                   description: "UserAccessKey list"
                    items:
                      $ref: "../model/UserAccessKey.yaml#/definitions/userAccessKey"
               requestId:
@@ -93,21 +115,21 @@ paths:
 
 
   "/user:describeUserInfo":
-    ###################### Obtain user's Information Based on AccessKey or AccountId ######################
+    ###################### Obtain User’s Information Based on AccessKey or AccountId ######################
     get:
-      description: "Obtain user's information based on AccessKey or AccountId"
+      description: "Obtain user’s information based on AccessKey or AccountId"
       operationId: describeUserInfo
       x-jdcloud-internal: true
       parameters:
         - name: accessKey
           in: query
           type: string
-          description: "User accessKey"
+          description: "User AccessKey"
           required: false
         - name: accountId
           in: query
           type: string
-          description: "user's Unique id"
+          description: "User’s Unique id"
           required: false
       responses:
         200:
@@ -129,16 +151,16 @@ paths:
                   accountId:
                     type: integer
                     format: int64
-                    description: "user's Unique id"
+                    description: "User’s Unique id"
                   accessKey:
                     type: string
-                    description: "accessKey, blank when inputting a parameter as accountId"
+                    description: "AccessKey, blank when inputting a parameter as accountId"
                   accessKeySecret:
                     type: string
-                    description: "accessKeySecret, blank when inputting parameter as accountId"
+                    description: "AccessKeySecret, blank when inputting parameter as accountId"
                   state:
                     type: integer
-                    description: "accessKey status, 0-Disabled, 1-Enabled, blank when inputting a parameter as accountId"
+                    description: "AccessKey status, 0-Disabled, 1-Enabled, blank when inputting a parameter as accountId"
                   yn:
                     type: integer
                     description: "Deleted or not, 0-Deleted, 1-Valid, blank when inputting a parameter as accountId"
@@ -146,16 +168,16 @@ paths:
                 type: string
 
   "/user:describeBaseInfo":
-    ###################### Obtain user's basic information based on user pin ######################
+    ###################### Obtain user’s basic information based on user pin ######################
     get:
-      description: "Obtain user's basic information based on user pin"
+      description: "Obtain user’s basic information based on user pin"
       operationId: describeBaseInfo
       x-jdcloud-internal: true
       parameters:
         - name: pin
           in: query
           type: string
-          description: "User pin"
+          description: "User Pin"
           required: true
       responses:
         200:
@@ -167,7 +189,7 @@ paths:
                 properties:
                   pin:
                     type: string
-                    description: "User pin"
+                    description: "User Pin"
                   enabled:
                     type: integer
                     description: "If the user is available; 1 means that the user available, while 0 means that the user is unavailable and the user is in the blacklist"
@@ -186,33 +208,33 @@ paths:
                   accountId:
                     type: integer
                     format: int64
-                    description: "user's Unique id"
+                    description: "User’s Unique id"
                   meta:
                     type: string
-                    description: "user's Extended Information"
+                    description: "User’s Extended Information"
                   activeStatus:
                     type: integer
-                    description: "user's Activation Status"
+                    description: "User’s Activation Status"
                   cscPhone:
                     type: string
-                    description: "user's Mobile Phone Number"
+                    description: "User’s Mobile Phone Number"
                   cscEmail:
                     type: string
-                    description: "user's Email"
+                    description: "User’s Email"
               requestId:
                 type: string
 
   "/user:describeUserThreshold":
-    ###################### Obtain user's doorhead value based user pin ######################
+    ###################### Obtain user’s doorhead value based user pin ######################
     get:
-      description: "Obtain user's threshold value based user pin"
+      description: "Obtain user’s threshold value based user pin"
       operationId: describeUserThreshold
       x-jdcloud-internal: true
       parameters:
         - name: pin
           in: query
           type: string
-          description: "User pin"
+          description: "User Pin"
           required: true
       responses:
         200:
@@ -224,7 +246,7 @@ paths:
                 properties:
                   pin:
                     type: string
-                    description: "User pin"
+                    description: "User Pin"
                   threshold:
                     type: number
                     description: "Threshold Value"
@@ -263,7 +285,7 @@ paths:
          - name: pin
            in: query
            type: string
-           description: "User pin"
+           description: "User Pin"
            required: true
         responses:
           200:

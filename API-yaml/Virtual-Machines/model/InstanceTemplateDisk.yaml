@@ -11,4 +11,4 @@ definitions:
         description: "The size of the cloud disk, unit is GiB; ssd type value range[20, 1000] GB, step size: 10G, premium-hdd type value range[20, 3000] GB, step size: 10G"
       snapshotId:
         type: string
-        description: "Snapshot ID used to create Cloud Disk Service"
+        description: "Snapshot ID used to create cloud disk"

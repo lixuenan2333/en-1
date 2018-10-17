@@ -292,4 +292,4 @@ parameters:
     in: path
     required: true
     type: string
-    description: "Cloud Disk ID"
+    description: "Cloud Disk Service ID"

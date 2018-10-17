@@ -48,7 +48,4 @@ definitions:
       instanceVersion:
         type: string
         description: "Instance Version"
-      auth:
-        type: boolean
-        description: With or Without Password
 

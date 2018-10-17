@@ -8,7 +8,7 @@ definitions:
     properties:
       networkInterfaceId:
         type: string
-        description: "ENI ID"
+        description: "Elastic Network Interface ID"
       macAddress:
         type: string
         description: "Ethernet Address"
@@ -28,7 +28,7 @@ definitions:
         description: "Source and target IP address verification, with value 0 or 1"
       primaryIp:
         $ref: "./NetworkInterfacePrivateIp.yaml#/definitions/networkInterfacePrivateIp"
-        description: "Network Interface Primary IP"
+        description: "Primary IP of Network Interface"
       secondaryIps:
         type: array
         items:
