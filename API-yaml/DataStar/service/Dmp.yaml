@@ -34,10 +34,10 @@ paths:
                             description: "Description Information"
                           data:
                             type: string
-                            description: Map<String,String>>, the serialized character string needs to be reconverted before use. Key is deviceId, value is crowd package Id
+                            description: The string is serialized by Map<String, String>, it needs to be reconverted before use. Key is deviceId, and value is crowd package Id
                       requestId:
                         type: string
-                        description: Request ID, requests are different at each time
+                        description: Request ID, it is different at each time
                 500:
                   description: "Internal server error"
 
