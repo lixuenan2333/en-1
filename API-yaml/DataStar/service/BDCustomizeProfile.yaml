@@ -41,7 +41,7 @@ paths:
                             description: True is success, false is failure
                           message:
                             type: string
-                            description: Description Information
+                            description: "Description Information"
                           data:
                             type: string
                             description: Map<String, Map<String,String>>, the serialized character string needs to be reconverted before use. Key is the corresponding deviceId, value is the corresponding profile label content, the key of the map within value is the label code of the profile, and value is the value corresponding to the profile.

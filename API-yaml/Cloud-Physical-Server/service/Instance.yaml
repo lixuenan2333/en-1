@@ -526,7 +526,7 @@ paths:
           in: query
           type: integer
           default: 1
-          description: "Page Number; 1 by default"
+          description: "Page; 1 by default"
         - name: pageSize
           in: query
           type: integer
@@ -573,7 +573,7 @@ paths:
                       $ref: "../model/Instance.yaml#/definitions/instance"
                   pageNumber:
                     type: integer
-                    description: "Page Number; 1 by default"
+                    description: "Page; 1 by default"
                   pageSize:
                     type: integer
                     description: "Paging Size; 10 by default; value range [10, 100]"
