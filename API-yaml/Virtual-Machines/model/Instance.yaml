@@ -16,19 +16,19 @@ definitions:
         description: "Instance Type"
       vpcId:
         type: string
-        description: "ID of the VPC to which the primary network interface belongs"
+        description: "ID of Primary Network Interface’s VPC "
       subnetId:
         type: string
-        description: "ID of the subnet to which the primary network interface belongs"
+        description: "ID of Primary Network Interface’s Subnet "
       privateIpAddress:
         type: string
         description: "Primary IP address of primary network interface"
       elasticIpId:
         type: string
-        description: "The ID of the primary IP of primary network interface associating EIP"
+        description: "Elastic IP ID Associated to Primary IP of Primary Network Interface "
       elasticIpAddress:
         type: string
-        description: "The address of the primary IP of primary network interface associating EIP"
+        description: "Elastic IP Associated to Primary IP of Primary Network Interface "
       status:
         type: string
         description: "Virtual Machine Status,<a href='http://docs.jdcloud.com/virtual-machines/api/vm_status'>Refer to virtual machine status</a>"

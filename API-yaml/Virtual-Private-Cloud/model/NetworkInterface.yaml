@@ -8,7 +8,7 @@ definitions:
         description: "Elastic Network Interface Name"
       networkInterfaceId:
         type: string
-        description: "Elastic Network Interface ID"
+        description: "ENI ID"
       az:
         type: string
         description: "Availability Zone Name"
@@ -34,7 +34,7 @@ definitions:
         description: "Source and target IP address verification, with value 0 or 1"
       primaryIp:
         $ref: "./NetworkInterfacePrivateIp.yaml#/definitions/networkInterfacePrivateIp"
-        description: "Primary IP of Network Interface"
+        description: "Network Interface Primary IP"
       secondaryIps:
         type: array
         items:

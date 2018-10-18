@@ -44,7 +44,7 @@ paths:
                 - Disk Size
                     - SSD: Range [10, 100]GB, Step Size: 10G
                     - Premium-hdd: Range [20, 1000]GB, Step Size: 10G
-                - Automatic Deletion
+                - Auto-delete
                     - The cloud disk will be automatically deleted with the container by default. For the data disk or the shared type data disk with the monthly package, the parameter is invalid.
                 - The existing Cloud Disk Service can be selected.
             - Data Disk
@@ -52,13 +52,13 @@ paths:
                 - Disk Size
                     - ssd: Range[20, 1000] GB, Step Size: 10G
                     - premium-hdd: Range[20, 3000] GB, Step Size: 10G
-                - Automatic Deletion
+                - Auto-delete
                     - Automatic Deletion by Default
                 - The existing Cloud Disk Service can be selected.
                 - A single container can be mounted with 7 data volumes at most.
         - Billing
-          - Elastic IP billing mode: If the separate setting of Pay By Consumption is selected, other billing modes shall be subject to the machine.
-          - The billing mode of Cloud Disk Service is subject to the machine.
+          - Billing mode of EIP. You may choose pay by consumption separately, and the other billing modes are subject to the machine.
+          - The billing mode of the cloud disk is subject to the machine
         - Container Log
             - A 10MB storage space will be distributed to the local by default and is automatically rotated.
         - Others
@@ -77,7 +77,7 @@ paths:
           description: "Purchase number of instances; value range: [1,100]"
       responses:
         200:
-          description: "OK"
+          description: OK
           schema:
             properties:
               result:
@@ -105,13 +105,13 @@ paths:
     get:
       description: |
         Search Native Container details in batches <br>
-        This interface supports query in pages, with 20 entries per page by default.
+        This API supports paging query with 20 items per page by default.
       operationId: describeContainers
       parameters:
         - name: pageNumber
           in: query
           type: integer
-          description: "Page number; 1 by default"
+          description: "Page; 1 by default"
         - name: pageSize
           in: query
           type: integer
@@ -124,8 +124,8 @@ paths:
           description: | 
             containerId - Instance ID, exact match, support many IDs
             privateIpAddress - Primary network interface IP address, fuzzy matching and supporting many IP addresses
-            az - Availability zone, exact matching, supporting many availability zones
-            vpcId - Virtual Private Cloud ID, exact match, support many IDs
+            az-Availability Zone, exact match, multiple supported
+            vpcId-VPC ID, exact match, multiple supported
             status - Container status, exact match, support many statuses
             name - Instance name, fuzzy matching and supporting many names
             subnetId - Instance ID, fuzzy matching and supporting many IDs

@@ -9,7 +9,7 @@ definitions:
         description: "Attach ID"
       diskId:
         type: string
-        description: "Cloud Disk Service ID"
+        description: "Cloud Disk ID"
       instanceType:
         type: string
         enum:

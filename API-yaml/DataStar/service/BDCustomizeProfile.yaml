@@ -18,7 +18,7 @@ paths:
                   in: query
                   required: true
                   type: string
-                  description: deviceId, mobile, etc., separated by multiple id English commas
+                  description: deviceId, mobile, etc., multiple ids are separated by English commas
                 - name: type
                   in: query
                   required: true
@@ -41,13 +41,13 @@ paths:
                             description: True is success, false is failure
                           message:
                             type: string
-                            description: Description Information
+                            description: "Description Information"
                           data:
                             type: string
-                            description: Map<String, Map<String,String>>, the serialized character string needs to be reconverted before use. Key is the corresponding deviceId, value is the corresponding profile label content, the key of the map within value is the label code of the profile, and value is the value corresponding to the profile.
+                            description: The string is serialized by Map<String, Map<String,String>>. It needs to be reconverted before use. Key is deviceId, and value is the content corresponding to the profile label. The key of inner map is the label code of the profile, while the value is the one corresponding to the profile
                       requestId:
                         type: string
-                        description: Request ID, requests are different at each time
+                        description: Request ID, it is different at each time
                 500:
                   description: "Internal server error"
 

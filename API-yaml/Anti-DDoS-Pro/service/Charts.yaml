@@ -7,10 +7,10 @@ info:
 basePath: /regions/{regionId}
 
 paths:
-  /charts:ddosGraph:
+  /charts:DDoSGraph:
     get:
       description: "DDos Protection Report"
-      operationId: ddosGraph
+      operationId: describeDDoSGraph
       parameters:
         - name: startTime
           in: query
@@ -59,7 +59,7 @@ paths:
   /charts:fwdGraph:
     get:
       description: "Forwarding Traffic Report"
-      operationId: fwdGraph
+      operationId: describeFwdGraph
       parameters:
         - name: startTime
           in: query
@@ -100,10 +100,10 @@ paths:
                     description: "Traffic Unit"
               requestId:
                 type: string
-  /charts:ccGraph:
+  /charts:CCGraph:
     get:
       description: "Forwarding Traffic Report"
-      operationId: ccGraph
+      operationId: describeCCGraph
       parameters:
         - name: startTime
           in: query
